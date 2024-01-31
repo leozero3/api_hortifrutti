@@ -1,16 +1,10 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
+import Route from '@ioc:Adonis/Core/Route'
+import User from 'App/Models/User'
 
-import router from '@adonisjs/core/services/router'
-
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
+Route.get('/', async () => {
+  User.create({
+    email: 'admim@admim.com',
+    password: '123456',
+    tipo: 'admim',
+  })
 })
