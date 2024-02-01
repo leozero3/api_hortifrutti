@@ -1,3 +1,6 @@
+documentação  adonisJS v5
+https://v5-docs.adonisjs.com/guides/introduction
+
 // criar pasta api
 yarn create adonisjs  -K=api
 npm init adonis-ts-app@latest `nome da pasta`
@@ -22,5 +25,6 @@ npm i @adonisjs/auth@8.2.3
 node ace configure @adonisjs/auth
 //
 
-# Configure with access tokens guard
-node ace configure @adonisjs/auth --guard=access_tokens
+// Hashing
+npm i phc-argon2
+//
