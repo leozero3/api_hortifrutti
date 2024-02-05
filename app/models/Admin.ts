@@ -9,7 +9,7 @@ export default class Admin extends BaseModel {
   public userId: number
 
   @column()
-  public nome: number
+  public nome: string
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime | null

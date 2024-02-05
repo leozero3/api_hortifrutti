@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('descricao').nullable()
       table.string('imagem').nullable()
       table.decimal('preco', 10, 2).notNullable()
-      table.decimal('unidade', 3).notNullable()
+      table.string('unidade', 3).notNullable()
       table.string('posicao').notNullable()
       table.boolean('ativo').notNullable().defaultTo(true)
 
