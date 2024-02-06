@@ -10,7 +10,7 @@ export default class extends BaseSeeder {
       tipo: 'estabelecimento',
     })
     await Estabelecimento.create({
-      nome: 'Estabelecimento',
+      nome: 'Estabelecimentos',
       logo: 'https://via.placeholder.com/150',
       bloqueado: false,
       online: true,
