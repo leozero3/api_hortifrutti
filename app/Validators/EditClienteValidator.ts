@@ -22,5 +22,14 @@ export default class EditClienteValidator {
     ]),
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    'required': '{{ field }} é obrigatorio para o cadastro',
+    'email.email': '{{ field }} deve ser um e-mail válido',
+    'email.unique': '{{ field }} já está cadastrado',
+    'password.minLength': '{{ field }} deve conter no mínimo 8 caracteres',
+    'password.maxLength': '{{ field }} deve conter no máximo 180 caracteres',
+    'nome.minLength': '{{ field }} deve conter no mínimo 3 caracteres',
+    'nome.maxLength': '{{ field }} deve conter no máximo 255 caracteres',
+    'telefone.mobile': '{{ field }} deve ser um telefone valido',
+  }
 }
