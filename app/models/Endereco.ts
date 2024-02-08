@@ -1,14 +1,15 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasOne, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import Cidade from './Cidade'
 
 export default class Endereco extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public clienteId: number
+  public cliente_id: number
 
   @column()
-  public cidadeId: number
+  public cidade_id: number
 
   @column()
   public rua: string
@@ -24,4 +25,10 @@ export default class Endereco extends BaseModel {
 
   @column()
   public complemento: string | null
+
+  @hasOne(() => Cidade, {
+    foreignKey: 'cidade_id',
+    localKey: 'id',
+  })
+  public cidade: HasOne<typeof Cidade>
 }

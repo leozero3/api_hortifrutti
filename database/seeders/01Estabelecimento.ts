@@ -64,7 +64,7 @@ export default class EstabelecimentoSeeder extends BaseSeeder {
       await CidadesEstabelecimento.create({
         cidade_id: faker.number.int({ min: 1, max: 2 }),
         estabelecimento_id: i,
-        custo_entrega: faker.number.float({ min: 0, max: 3, precision: 0.01 }),
+        custo_entrega: faker.number.float({ min: 0, max: 3, multipleOf: 0.01 }),
       })
     }
   }
