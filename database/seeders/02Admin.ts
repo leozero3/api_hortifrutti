@@ -2,7 +2,7 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Admin from 'App/models/Admin'
 import User from 'App/models/user'
 
-export default class extends BaseSeeder {
+export default class AdminSeeder extends BaseSeeder {
   public async run() {
     const usuario = await User.create({
       email: 'admin@email.com',
