@@ -10,7 +10,7 @@ export default class Cidade extends BaseModel {
   public nome: string
 
   @column()
-  public estadoId: number
+  public estado_id: number
 
   @column()
   public ativo: boolean
@@ -25,7 +25,7 @@ export default class Cidade extends BaseModel {
     pivotTable: 'cidades_estabelecimentos',
     localKey: 'id',
     pivotForeignKey: 'cidade_id',
-    relatedKey: 'estabelecimento_id',
+    relatedKey: 'id',
     pivotRelatedForeignKey: 'estabelecimento_id',
   })
   public estabelecimentos: ManyToMany<typeof Estabelecimento>

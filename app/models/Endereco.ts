@@ -5,10 +5,10 @@ export default class Endereco extends BaseModel {
   public id: number
 
   @column()
-  public cliente_id: number
+  public clienteId: number
 
   @column()
-  public cidade_id: number
+  public cidadeId: number
 
   @column()
   public rua: string
@@ -20,11 +20,8 @@ export default class Endereco extends BaseModel {
   public bairro: string
 
   @column()
-  public cep: string
+  public pontoReferencia: string | null
 
   @column()
   public complemento: string | null
-
-  @column()
-  public ponto_referencia: string
 }

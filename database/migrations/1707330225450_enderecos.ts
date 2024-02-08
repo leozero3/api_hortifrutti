@@ -9,7 +9,6 @@ export default class extends BaseSchema {
 
       table.integer('cliente_id').unsigned().notNullable().references('id').inTable('clientes')
       table.integer('cidade_id').unsigned().notNullable().references('id').inTable('cidades')
-
       table.string('rua').notNullable()
       table.string('numero').nullable()
       table.string('bairro').notNullable()
