@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import CreateEditValidator from 'App/Validators/CreateEditValidator'
+import CreateEditEnderecoValidator from 'App/Validators/CreateEditEnderecoValidator'
+import CreateEditValidator from 'App/Validators/CreateEditEnderecoValidator'
 import Cliente from 'App/models/Cliente'
 import Endereco from 'App/models/Endereco'
 
@@ -20,8 +21,6 @@ export default class EnderecosController {
     return response.ok(getCliente.enderecos)
   }
 
-  public async create({}: HttpContextContract) {}
-
   public async store({ request, response, auth }: HttpContextContract) {
     const payload = await request.validate(CreateEditValidator)
     const userAuth = await auth.use('api').authenticate()
@@ -39,8 +38,28 @@ export default class EnderecosController {
 
     return response.ok(endereco)
   }
+  public async update({ request, response, params }: HttpContextContract) {
+    const payload = await request.validate(CreateEditEnderecoValidator)
+    const endereco = await Endereco.findOrFail(params.id)
 
-  // public async update({ request, response }: HttpContextContract) {}
+    endereco.merge(payload)
 
-  // public async destroy({ request, response }: HttpContextContract) {}
+    await endereco.save()
+
+    return response.ok(endereco)
+  }
+
+  public async destroy({ params, response }: HttpContextContract) {
+    try {
+      const resp = await Endereco.query().where('id', params.id).delete()
+
+      if (resp.includes(1)) {
+        return response.noContent()
+      } else {
+        return response.notFound()
+      }
+    } catch (error) {
+      return response.badRequest()
+    }
+  }
 }
