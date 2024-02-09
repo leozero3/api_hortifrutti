@@ -7,7 +7,7 @@ export default class Cliente extends BaseModel {
   public id: number
 
   @column()
-  public userId: number
+  public user_id: number
 
   @column()
   public nome: string
@@ -19,8 +19,8 @@ export default class Cliente extends BaseModel {
   public updatedAt: DateTime
 
   @hasMany(() => Endereco, {
-    localKey: 'id',
     foreignKey: 'cliente_id',
+    localKey: 'id',
   })
   public enderecos: HasMany<typeof Endereco>
 }

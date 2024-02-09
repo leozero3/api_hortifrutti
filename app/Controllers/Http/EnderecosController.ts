@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import CreateEditValidator from 'App/Validators/CreateEditValidator'
 import Cliente from 'App/models/Cliente'
+import Endereco from 'App/models/Endereco'
 
 export default class EnderecosController {
   public async index({ response, auth }: HttpContextContract) {
@@ -23,23 +24,23 @@ export default class EnderecosController {
 
   public async store({ request, response, auth }: HttpContextContract) {
     const payload = await request.validate(CreateEditValidator)
-    const userAuth = await auth.use('api').authenticate().
-    const cliente = await Cliente.findByOrFail('user_id', userAuth)
+    const userAuth = await auth.use('api').authenticate()
+    const cliente = await Cliente.findByOrFail('user_id', userAuth.id)
 
     const endereco = await Endereco.create({
-      cliente_id: payload.cliente_id,
       cidade_id: payload.cidade_id,
+      cliente_id: cliente.id,
       rua: payload.rua,
       numero: payload.numero,
       bairro: payload.bairro,
-      pontoReferencia: payload.pontoReferencia,
+      ponto_referencia: payload.ponto_referencia,
       complemento: payload.complemento,
     })
 
     return response.ok(endereco)
   }
 
-  public async update({ request, response }: HttpContextContract) {}
+  // public async update({ request, response }: HttpContextContract) {}
 
-  public async destroy({ request, response }: HttpContextContract) {}
+  // public async destroy({ request, response }: HttpContextContract) {}
 }

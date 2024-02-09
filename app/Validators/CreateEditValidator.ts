@@ -9,7 +9,7 @@ export default class CreateEditValidator {
     rua: schema.string({ trim: true }, [rules.maxLength(255)]),
     numero: schema.string.nullableAndOptional({ trim: true }, [rules.maxLength(20)]),
     bairro: schema.string({ trim: true }, [rules.maxLength(255)]),
-    pontoReferencia: schema.string.nullableAndOptional({ trim: true }, [rules.maxLength(255)]),
+    ponto_referencia: schema.string.nullableAndOptional({ trim: true }, [rules.maxLength(255)]),
     complemento: schema.string.nullableAndOptional({ trim: true }, [rules.maxLength(255)]),
   })
 

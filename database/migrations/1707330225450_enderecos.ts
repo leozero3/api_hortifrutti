@@ -12,7 +12,6 @@ export default class extends BaseSchema {
       table.string('rua').notNullable()
       table.string('numero').nullable()
       table.string('bairro').notNullable()
-      table.string('cep').notNullable()
       table.string('complemento').nullable()
       table.string('ponto_referencia').nullable()
     })

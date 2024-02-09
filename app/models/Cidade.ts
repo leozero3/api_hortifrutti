@@ -1,4 +1,4 @@
-import { BaseModel, HasOne, ManyToMany, column, hasOne, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasOne, hasOne, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Estado from './Estado'
 import Estabelecimento from './Estabelecimento'
 

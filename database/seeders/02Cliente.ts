@@ -12,7 +12,7 @@ export default class ClienteSeeder extends BaseSeeder {
     await Cliente.create({
       nome: 'Cliente',
       telefone: '19 99999-8888',
-      userId: usuario.id,
+      user_id: usuario.id,
     })
   }
 }
