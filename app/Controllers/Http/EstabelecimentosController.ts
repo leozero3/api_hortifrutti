@@ -1,4 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Cidade from 'App/models/Cidade'
+import CidadesEstabelecimento from 'App/models/CidadesEstabelecimento'
 import Estabelecimento from 'App/models/Estabelecimento'
 import Pedido from 'App/models/Pedido'
 
@@ -17,5 +19,40 @@ export default class EstabelecimentosController {
       .orderBy('pedido_id', 'desc')
 
     return response.ok(pedidos)
+  }
+
+  public async show({ params, response }: HttpContextContract) {
+    const idEst: number = params.id
+
+    let arrayCidades: any = []
+    const cidades = await CidadesEstabelecimento.query().where('estabelecimento_id', idEst)
+
+    for await (const cidade of cidades) {
+      const cidade_ = await Cidade.findByOrFail('id', cidade.cidade_id)
+      arrayCidades.push({
+        id: cidade_.id,
+        cidade: cidade_.nome,
+        custo_entrega: cidade.custo_entrega,
+      })
+    }
+
+    const estabelecimento = await Estabelecimento.query()
+      .where('id', idEst)
+      .preload('categorias', (categoriasQuery) => {
+        categoriasQuery.preload('produtos')
+      })
+      .preload('meiosPagamentos')
+      .firstOrFail()
+
+    return response.ok({
+      id: estabelecimento.id,
+      nome: estabelecimento.nome,
+      logo: estabelecimento.logo,
+      bloqueado: estabelecimento.bloqueado,
+      online: estabelecimento.online,
+      categorias: estabelecimento.categorias,
+      meiosPagamentos: estabelecimento.meiosPagamentos,
+      cidades: arrayCidades,
+    })
   }
 }

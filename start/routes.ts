@@ -10,6 +10,8 @@ Route.get('/cidades', 'CidadesController.index')
 
 Route.get('/cidades/:id/estabelecimentos', 'CidadesController.Estabelecimentos')
 
+Route.get('/estabelecimentos/:id', 'EstabelecimentosController.show')
+
 Route.group(() => {
   Route.get('/auth/me', 'AuthController.me')
   Route.resource('/enderecos', 'EnderecosController').only(['store', 'index', 'update', 'destroy'])
