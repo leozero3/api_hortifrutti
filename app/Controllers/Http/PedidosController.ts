@@ -109,4 +109,36 @@ export default class PedidosController {
       return response.badRequest('Something in the request is wrong')
     }
   }
+
+  public async index({ response, auth }: HttpContextContract) {
+    const userAuth = await auth.use('api').authenticate()
+    const cliente = await Cliente.findByOrFail('user_id', userAuth.id)
+
+    const pedidos = await Pedido.query()
+      .where('cliente_id', cliente.id)
+      .preload('estabelecimento')
+      .preload('pedido_status', (statusQuery) => {
+        statusQuery.preload('status')
+      })
+      .orderBy('pedido_id', 'desc')
+
+    return response.ok(pedidos)
+  }
+
+  public async show({ params, response, auth }: HttpContextContract) {
+    const idPedido = params.hash_id
+    // const userAuth = await auth.use('api').authenticate()
+    // const cliente = await Cliente.findByOrFail('user_id', userAuth.id)
+
+    const pedido = await Pedido.query()
+      .where('hash_id', idPedido)
+      .preload('produtos', (produtoQuery) => {
+        produtoQuery.preload('produto')
+      })
+      .preload('cliente')
+      .preload('endereco')
+      .preload('estabelecimento')
+      .preload('meio_pagamento')
+      .preload()
+  }
 }
