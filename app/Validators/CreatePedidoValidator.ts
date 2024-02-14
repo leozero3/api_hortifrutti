@@ -17,7 +17,7 @@ export default class CreatePedidoValidator {
         observacao: schema.string.nullableAndOptional({ trim: true }),
       })
     ),
-    endereco: schema.number([rules.exists({ table: 'enderecos', column: 'id' })]),
+    endereco_id: schema.number([rules.exists({ table: 'enderecos', column: 'id' })]),
   })
 
   public messages: CustomMessages = {}
