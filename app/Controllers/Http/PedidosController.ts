@@ -9,7 +9,6 @@ import PedidoEndereco from 'App/models/PedidoEndereco'
 import PedidoProduto from 'App/models/PedidoProduto'
 import PedidoStatus from 'App/models/PedidoStatus'
 import Produto from 'App/models/Produto'
-
 var randomstring = require('randomstring')
 
 export default class PedidosController {
@@ -58,10 +57,13 @@ export default class PedidosController {
       let valorTotal = 0
       for await (const produto of payload.produtos) {
         const prod = await Produto.findByOrFail('id', produto.produto_id)
-        valorTotal += produto.quantidade * prod.preco
+        valorTotal += prod.preco * produto.quantidade
       }
-      valorTotal = estabCidade ? valorTotal + estabCidade.custo_entrega : valorTotal
+      valorTotal = estabCidade
+        ? valorTotal + parseFloat(estabCidade.custo_entrega.toString())
+        : valorTotal
 
+      console.log('valorTotal antes do parseFloat:', valorTotal)
       valorTotal = parseFloat(valorTotal.toFixed(2))
 
       if (payload.troco_para != null && payload.troco_para < valorTotal) {
@@ -106,7 +108,7 @@ export default class PedidosController {
       //
     } catch (error) {
       await trx.rollback()
-      return response.badRequest('Something in the request is wrong')
+      return response.badRequest('Something in the request is wrong' + error)
     }
   }
 
@@ -120,15 +122,13 @@ export default class PedidosController {
       .preload('pedido_status', (statusQuery) => {
         statusQuery.preload('status')
       })
-      .orderBy('pedido_id', 'desc')
+      .orderBy('id', 'desc')
 
     return response.ok(pedidos)
   }
 
-  public async show({ params, response, auth }: HttpContextContract) {
+  public async show({ params, response }: HttpContextContract) {
     const idPedido = params.hash_id
-    // const userAuth = await auth.use('api').authenticate()
-    // const cliente = await Cliente.findByOrFail('user_id', userAuth.id)
 
     const pedido = await Pedido.query()
       .where('hash_id', idPedido)

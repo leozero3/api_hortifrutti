@@ -41,7 +41,7 @@ export default class EstabelecimentosController {
       .preload('categorias', (categoriasQuery) => {
         categoriasQuery.preload('produtos')
       })
-      .preload('meiosPagamentos')
+      .preload('meiospagamentos')
       .firstOrFail()
 
     return response.ok({
@@ -51,7 +51,7 @@ export default class EstabelecimentosController {
       bloqueado: estabelecimento.bloqueado,
       online: estabelecimento.online,
       categorias: estabelecimento.categorias,
-      meiosPagamentos: estabelecimento.meiosPagamentos,
+      meiosPagamentos: estabelecimento.meiospagamentos,
       cidades: arrayCidades,
     })
   }
