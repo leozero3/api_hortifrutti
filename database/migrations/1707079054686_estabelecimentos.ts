@@ -13,13 +13,11 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('users')
         .onDelete('CASCADE')
-
-      table.string('nome', 255).notNullable
-      table.string('logo', 255).nullable
+      table.string('nome', 255).notNullable()
+      table.string('logo', 255).nullable()
       table.boolean('bloqueado').notNullable().defaultTo(false)
       table.boolean('online').notNullable().defaultTo(false)
-
-      table.timestamp('updated_at').nullable
+      table.timestamp('updated_at').nullable()
     })
   }
 

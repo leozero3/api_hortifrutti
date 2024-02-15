@@ -21,7 +21,7 @@ export default class extends BaseSchema {
         .unsigned()
         .notNullable()
         .references('id')
-        .inTable('meio_pagamentos')
+        .inTable('meios_pagamentos')
 
       table
         .integer('pedido_endereco_id')

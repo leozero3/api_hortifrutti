@@ -139,6 +139,14 @@ export default class PedidosController {
       .preload('endereco')
       .preload('estabelecimento')
       .preload('meio_pagamento')
-      .preload()
+      .preload('pedido_status', (statusQuery) => {
+        statusQuery.preload('status')
+      })
+      .first()
+
+    if (pedido == null) {
+      return response.notFound('Pedido não encontrado')
+    }
+    return response.ok(pedido)
   }
 }

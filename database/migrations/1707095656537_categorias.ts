@@ -5,12 +5,11 @@ export default class extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-      table.string('nome')
+      table.increments('id').primary()
+      table.string('nome').notNullable()
       table.string('descricao').nullable()
-      table.string('position').notNullable()
+      table.integer('posicao').notNullable().defaultTo(1)
       table.boolean('ativo').notNullable().defaultTo(true)
-
       table
         .integer('estabelecimento_id')
         .notNullable()
@@ -18,7 +17,6 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('estabelecimentos')
         .onDelete('RESTRICT')
-
       table.timestamps(true, true)
       table.timestamp('deleted_at').nullable()
     })
