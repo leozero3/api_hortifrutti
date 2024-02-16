@@ -19,6 +19,7 @@ export default class EstabelecimentoSeeder extends BaseSeeder {
       online: true,
       bloqueado: false,
       userId: user.id,
+      logo: faker.image.avatar(),
     })
 
     for (let i = 2; i <= 20; i++) {
@@ -35,6 +36,7 @@ export default class EstabelecimentoSeeder extends BaseSeeder {
         online: true,
         bloqueado: false,
         userId: i,
+        logo: faker.image.avatar(),
       })
     }
 
