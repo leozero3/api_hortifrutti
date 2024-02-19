@@ -9,13 +9,13 @@ import User from 'App/models/user'
 export default class EstabelecimentoSeeder extends BaseSeeder {
   public async run() {
     const user = await User.create({
-      email: 'webevolui@email.com',
+      email: 'leo@leo.com',
       password: '123456',
       tipo: 'estabelecimentos',
     })
 
     await Estabelecimento.create({
-      nome: 'Estabelecimento',
+      nome: 'loja do Isaac',
       online: true,
       bloqueado: false,
       userId: user.id,
@@ -32,7 +32,7 @@ export default class EstabelecimentoSeeder extends BaseSeeder {
 
     for (let i = 2; i <= 20; i++) {
       await Estabelecimento.create({
-        nome: `Estabelecimento ${i}`,
+        nome: faker.company.name(),
         online: true,
         bloqueado: false,
         userId: i,
